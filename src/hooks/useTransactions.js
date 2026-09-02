@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const STORAGE_KEY = "budget-transactions";
 
@@ -11,12 +11,14 @@ function useTransactions() {
       : [];
   });
 
-  useEffect(() => {
+  const saveTransactions = (updatedTransactions) => {
+    setTransactions(updatedTransactions);
+
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify(transactions)
+      JSON.stringify(updatedTransactions)
     );
-  }, [transactions]);
+  };
 
   const addTransaction = (transaction) => {
     const newTransaction = {
@@ -24,31 +26,34 @@ function useTransactions() {
       id: crypto.randomUUID(),
     };
 
-    setTransactions((currentTransactions) => [
-      ...currentTransactions,
+    const updatedTransactions = [
+      ...transactions,
       newTransaction,
-    ]);
+    ];
+
+    saveTransactions(updatedTransactions);
   };
 
   const updateTransaction = (id, updatedTransaction) => {
-    setTransactions((currentTransactions) =>
-      currentTransactions.map((transaction) =>
+    const updatedTransactions = transactions.map(
+      (transaction) =>
         transaction.id === id
           ? {
               ...transaction,
               ...updatedTransaction,
             }
           : transaction
-      )
     );
+
+    saveTransactions(updatedTransactions);
   };
 
   const deleteTransaction = (id) => {
-    setTransactions((currentTransactions) =>
-      currentTransactions.filter(
-        (transaction) => transaction.id !== id
-      )
+    const updatedTransactions = transactions.filter(
+      (transaction) => transaction.id !== id
     );
+
+    saveTransactions(updatedTransactions);
   };
 
   return {

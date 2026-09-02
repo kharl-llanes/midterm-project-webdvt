@@ -265,12 +265,194 @@
 
   line-height: 1.6;
 }
+/* =========================
+   TRANSACTION FORM
+========================= */
+
+.transaction-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 22px;
+
+  max-width: 850px;
+
+  padding: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.optional {
+  color: rgba(255, 255, 255, 0.3);
+
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+
+  padding: 14px 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.055);
+
+  color: white;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group option {
+  background: #151722;
+  color: white;
+}
+
+.amount-input {
+  position: relative;
+}
+
+.amount-input span {
+  position: absolute;
+
+  left: 15px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: rgba(255, 255, 255, 0.4);
+
+  pointer-events: none;
+}
+
+.amount-input input {
+  padding-left: 35px;
+}
+
+.form-error {
+  color: #ff8e8e;
+
+  font-size: 0.75rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding-top: 10px;
+}
+
+.primary-button,
+.secondary-button {
+  padding: 12px 20px;
+
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.primary-button {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  background: white;
+
+  color: #10121b;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.secondary-button:hover {
+  background: rgba(255, 255, 255, 0.09);
+
+  color: white;
+}
 
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 700px) {
+.transaction-form {
+  grid-template-columns: 1fr;
+
+  padding: 22px;
+}
+
+.full-width {
+  grid-column: auto;
+}
+
+.form-actions {
+  flex-direction: column-reverse;
+}
+
+.primary-button,
+.secondary-button {
+  width: 100%;
+}
+
   .navbar {
     padding: 15px;
   }
