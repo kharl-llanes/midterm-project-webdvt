@@ -428,12 +428,213 @@
 
   color: white;
 }
+/* =========================
+   TRANSACTION LIST
+========================= */
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.transaction-card {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 18px 20px;
+
+  color: white;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.transaction-card:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.transaction-icon {
+  width: 45px;
+  height: 45px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.transaction-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.transaction-info h3 {
+  margin: 0 0 5px;
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+}
+
+.transaction-info p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.38);
+
+  font-size: 0.78rem;
+}
+
+.transaction-amount {
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.transaction-amount.income {
+  color: #9be7b1;
+}
+
+.transaction-amount.expense {
+  color: #ff9d9d;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters {
+  display: flex;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+
+  padding: 18px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  min-width: 170px;
+}
+
+.filter-group label {
+  color: rgba(255, 255, 255, 0.4);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.filter-group select {
+  padding: 10px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.filter-group option {
+  background: #151722;
+  color: white;
+}
+
+
+/* =========================
+   BALANCE CARD COLORS
+========================= */
+
+.income-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(65, 180, 110, 0.12),
+      rgba(255, 255, 255, 0.04)
+    );
+}
+
+.expense-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(230, 90, 90, 0.1),
+      rgba(255, 255, 255, 0.04)
+    );
+}
 
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 700px) {
+
+  .section-heading {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.filters {
+  flex-direction: column;
+}
+
+.filter-group {
+  width: 100%;
+}
+
+.transaction-card {
+  padding: 15px;
+}
+
+.transaction-amount {
+  font-size: 0.85rem;
+}
+
 .transaction-form {
   grid-template-columns: 1fr;
 
