@@ -4,7 +4,9 @@ import useTransactions from "../hooks/useTransactions";
 
 function AddTransaction() {
   const navigate = useNavigate();
-  const { addTransaction } = useTransactions();
+
+  const { addTransaction } =
+    useTransactions();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -42,26 +44,35 @@ function AddTransaction() {
     const newErrors = {};
 
     if (!formData.title.trim()) {
-      newErrors.title = "Transaction title is required.";
+      newErrors.title =
+        "Transaction title is required.";
     }
 
     if (!formData.amount) {
-      newErrors.amount = "Amount is required.";
-    } else if (Number(formData.amount) <= 0) {
-      newErrors.amount = "Amount must be greater than zero.";
+      newErrors.amount =
+        "Amount is required.";
+    } else if (
+      Number(formData.amount) <= 0
+    ) {
+      newErrors.amount =
+        "Amount must be greater than zero.";
     }
 
     if (!formData.category) {
-      newErrors.category = "Please select a category.";
+      newErrors.category =
+        "Please select a category.";
     }
 
     if (!formData.date) {
-      newErrors.date = "Date is required.";
+      newErrors.date =
+        "Date is required.";
     }
 
     setErrors(newErrors);
 
-    return Object.keys(newErrors).length === 0;
+    return (
+      Object.keys(newErrors).length === 0
+    );
   };
 
   const handleSubmit = (event) => {
@@ -82,12 +93,15 @@ function AddTransaction() {
   return (
     <div className="page-container">
       <section className="page-header">
-        <p className="eyebrow">NEW ENTRY</p>
+        <p className="eyebrow">
+          NEW ENTRY
+        </p>
 
         <h1>Add Transaction</h1>
 
         <p className="subtitle">
-          Record a new source of income or expense.
+          Record a new source of income
+          or expense.
         </p>
       </section>
 
@@ -117,7 +131,9 @@ function AddTransaction() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="amount">Amount</label>
+          <label htmlFor="amount">
+            Amount
+          </label>
 
           <div className="amount-input">
             <span>₱</span>
@@ -142,7 +158,9 @@ function AddTransaction() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="type">Type</label>
+          <label htmlFor="type">
+            Type
+          </label>
 
           <select
             id="type"
@@ -150,13 +168,20 @@ function AddTransaction() {
             value={formData.type}
             onChange={handleChange}
           >
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
+            <option value="expense">
+              Expense
+            </option>
+
+            <option value="income">
+              Income
+            </option>
           </select>
         </div>
 
         <div className="form-group">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">
+            Category
+          </label>
 
           <select
             id="category"
@@ -186,7 +211,9 @@ function AddTransaction() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="date">Date</label>
+          <label htmlFor="date">
+            Date
+          </label>
 
           <input
             id="date"

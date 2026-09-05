@@ -19,7 +19,12 @@ body {
     "Segoe UI",
     sans-serif;
 
-  background: #090b14;
+  background: var(--background);
+  color: var(--text);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 button,
@@ -27,4 +32,34 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+:root {
+  --background: #080912;
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --card: rgba(255, 255, 255, 0.055);
+  --card-border: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="light"] {
+  --background: #eef1f7;
+  --text: #171923;
+  --text-muted: rgba(23, 25, 35, 0.55);
+  --card: rgba(255, 255, 255, 0.65);
+  --card-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Update your base body styles to use these variables */
+body {
+  background: var(--background);
+  color: var(--text);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }

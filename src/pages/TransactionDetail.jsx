@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+
 import useTransactions from "../hooks/useTransactions";
 
 function TransactionDetail() {
   const { id } = useParams();
+
   const navigate = useNavigate();
 
   const {
@@ -16,32 +22,11 @@ function TransactionDetail() {
     (item) => item.id === id
   );
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] =
+    useState(false);
 
-  const [formData, setFormData] = useState(
-    transaction || {}
-  );
-
-  if (!transaction) {
-    return (
-      <div className="page-container">
-        <div className="glass-card empty-state">
-          <div className="empty-icon">?</div>
-
-          <h3>Transaction not found</h3>
-
-          <p>
-            This transaction may have been deleted or
-            does not exist.
-          </p>
-
-          <Link to="/" className="primary-button">
-            Back to Dashboard
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  const [formData, setFormData] =
+    useState(transaction || {});
 
   const categories = [
     "Food",
@@ -55,8 +40,37 @@ function TransactionDetail() {
     "Other",
   ];
 
+  if (!transaction) {
+    return (
+      <div className="page-container">
+        <div className="glass-card empty-state">
+          <div className="empty-icon">
+            ?
+          </div>
+
+          <h3>
+            Transaction not found
+          </h3>
+
+          <p>
+            This transaction may have been
+            deleted or does not exist.
+          </p>
+
+          <Link
+            to="/"
+            className="primary-button"
+          >
+            Back to Dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } =
+      event.target;
 
     setFormData((currentData) => ({
       ...currentData,
@@ -66,6 +80,19 @@ function TransactionDetail() {
 
   const handleSave = (event) => {
     event.preventDefault();
+
+    if (
+      !formData.title?.trim() ||
+      !formData.category ||
+      !formData.date ||
+      Number(formData.amount) <= 0
+    ) {
+      alert(
+        "Please complete all required fields correctly."
+      );
+
+      return;
+    }
 
     updateTransaction(id, {
       ...formData,
@@ -85,6 +112,7 @@ function TransactionDetail() {
     }
 
     deleteTransaction(id);
+
     navigate("/");
   };
 
@@ -97,30 +125,30 @@ function TransactionDetail() {
 
   return (
     <div className="page-container">
-
       <div className="detail-back">
-        <Link to="/">← Back to Dashboard</Link>
+        <Link to="/">
+          ← Back to Dashboard
+        </Link>
       </div>
 
       <section className="page-header">
-        <p className="eyebrow">TRANSACTION DETAILS</p>
+        <p className="eyebrow">
+          TRANSACTION DETAILS
+        </p>
 
-        <h1>
-          {transaction.title}
-        </h1>
+        <h1>{transaction.title}</h1>
 
         <p className="subtitle">
-          View or update the details of this transaction.
+          View or update the details
+          of this transaction.
         </p>
       </section>
 
       {isEditing ? (
-
         <form
           className="glass-card transaction-form"
           onSubmit={handleSave}
         >
-
           <div className="form-group full-width">
             <label htmlFor="title">
               Transaction Name
@@ -136,7 +164,6 @@ function TransactionDetail() {
             />
           </div>
 
-
           <div className="form-group">
             <label htmlFor="amount">
               Amount
@@ -149,7 +176,7 @@ function TransactionDetail() {
                 id="amount"
                 name="amount"
                 type="number"
-                min="0"
+                min="0.01"
                 step="0.01"
                 value={formData.amount || ""}
                 onChange={handleChange}
@@ -157,7 +184,6 @@ function TransactionDetail() {
               />
             </div>
           </div>
-
 
           <div className="form-group">
             <label htmlFor="type">
@@ -179,7 +205,6 @@ function TransactionDetail() {
               </option>
             </select>
           </div>
-
 
           <div className="form-group">
             <label htmlFor="category">
@@ -208,7 +233,6 @@ function TransactionDetail() {
             </select>
           </div>
 
-
           <div className="form-group">
             <label htmlFor="date">
               Date
@@ -224,7 +248,6 @@ function TransactionDetail() {
             />
           </div>
 
-
           <div className="form-group full-width">
             <label htmlFor="description">
               Description
@@ -234,14 +257,14 @@ function TransactionDetail() {
               id="description"
               name="description"
               rows="4"
-              value={formData.description || ""}
+              value={
+                formData.description || ""
+              }
               onChange={handleChange}
             />
           </div>
 
-
           <div className="form-actions full-width">
-
             <button
               type="button"
               className="secondary-button"
@@ -259,17 +282,11 @@ function TransactionDetail() {
             >
               Save Changes
             </button>
-
           </div>
-
         </form>
-
       ) : (
-
         <div className="glass-card detail-card">
-
           <div className="detail-top">
-
             <div
               className={`detail-icon ${transaction.type}`}
             >
@@ -290,12 +307,9 @@ function TransactionDetail() {
                 ₱{formattedAmount}
               </h2>
             </div>
-
           </div>
 
-
           <div className="detail-grid">
-
             <div>
               <p className="detail-label">
                 Category
@@ -305,7 +319,6 @@ function TransactionDetail() {
                 {transaction.category}
               </strong>
             </div>
-
 
             <div>
               <p className="detail-label">
@@ -317,7 +330,6 @@ function TransactionDetail() {
               </strong>
             </div>
 
-
             <div className="detail-description">
               <p className="detail-label">
                 Description
@@ -328,15 +340,14 @@ function TransactionDetail() {
                   "No description provided."}
               </p>
             </div>
-
           </div>
 
-
           <div className="detail-actions">
-
             <button
               className="secondary-button"
-              onClick={() => setIsEditing(true)}
+              onClick={() =>
+                setIsEditing(true)
+              }
             >
               Edit Transaction
             </button>
@@ -347,13 +358,9 @@ function TransactionDetail() {
             >
               Delete Transaction
             </button>
-
           </div>
-
         </div>
-
       )}
-
     </div>
   );
 }
